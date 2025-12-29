@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026 - Surprise!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&family=Sacramento&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0c29;
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Container Card */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: popIn 1s ease forwards;
+        }
+
+        @keyframes popIn {
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Hidden Content initially */
+        .hidden-content {
+            display: none;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, #ff00cc, #333399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .year {
+            font-size: 4rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700;
+            font-weight: 800;
+            display: block;
+        }
+
+        p.message {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #e0e0e0;
+        }
+
+        .btn-open {
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(221, 36, 118, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-open:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(221, 36, 118, 0.6);
+        }
+
+        /* Footer Signature */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            font-family: 'Sacramento', cursive;
+            color: #aaa;
+        }
+
+        .footer span {
+            color: #ff512f;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Initial View */
+        .gift-box {
+            font-size: 5rem;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div id="initialView">
+            <div class="gift-box" onclick="revealSurprise()">🎁</div>
+            <h2>Tap to Open Your Surprise!</h2>
+            <p style="color: #bbb; margin-top: 10px;">Specially for you</p>
+            <br>
+            <button class="btn-open" onclick="revealSurprise()">Open 2026 Wish</button>
+        </div>
+
+        <div id="hiddenContent" class="hidden-content">
+            <h1>Happy New <span class="year">2026</span></h1>
+            
+            <p class="message">
+                Mere sabse aache dost aur unke pyare parivaar ko, <br><br>
+                Naya saal aap sabki zindagi mein dher saari khushiyan, swasthya aur safalta lekar aaye. 
+                “नया साल नई उम्मीदें लाए,
+                 हर दिन मुस्कान सजाए,
+                  जो बीत गया उसे भूलकर,
+             आने वाला हर पल खुशियाँ लाए।” 🌸 ✨
+            </p>
+
+            <div class="footer">
+                Made with ❤️ by <span>Rudra</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        function revealSurprise() {
+            const initialView = document.getElementById('initialView');
+            const hiddenContent = document.getElementById('hiddenContent');
+            const card = document.getElementById('mainCard');
+
+            // Hide button, show message
+            initialView.style.display = 'none';
+            hiddenContent.style.display = 'block';
+            
+            // Play sound (Optional visual feedback)
+            card.style.borderColor = "#ffd700";
+
+            // Trigger Confetti (Patakhe)
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+            var timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+
+            var particleCount = 50 * (timeLeft / duration);
+            // since particles fall down, start a bit higher than random
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+    </script>
+
+</body>
+</html>
